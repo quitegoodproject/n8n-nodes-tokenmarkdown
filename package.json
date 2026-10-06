@@ -1,0 +1,49 @@
+{
+  "name": "n8n-nodes-tokenmarkdown",
+  "version": "0.1.0",
+  "description": "n8n community node to strip 95% of HTML bloat and convert web pages into clean LLM-ready Markdown via TokenMarkdown AST engine.",
+  "keywords": [
+    "n8n-community-node-package",
+    "tokenmarkdown",
+    "web-scraping",
+    "markdown",
+    "rag",
+    "llm",
+    "ai-agents",
+    "token-optimization"
+  ],
+  "license": "MIT",
+  "homepage": "https://tokenmarkdown.com",
+  "author": {
+    "name": "The Quite Good Project",
+    "email": "engineering@quitegoodproject.com",
+    "url": "https://quitegoodproject.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quitegoodproject/n8n-nodes-tokenmarkdown.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && node scripts/copy-assets.js",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/TokenMarkdownApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/TokenMarkdown/TokenMarkdown.node.js"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "n8n-workflow": "^1.70.0",
+    "typescript": "^5.6.3"
+  }
+}

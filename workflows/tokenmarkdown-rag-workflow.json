@@ -1,0 +1,75 @@
+{
+  "name": "TokenMarkdown RAG Ingestion Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e6a0d24f-9e6b-4e6f-a18a-9f50e7b489a1",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+        "mode": "article",
+        "additionalOptions": {
+          "include_links": true,
+          "include_toc": true
+        }
+      },
+      "id": "93a4b6c8-f14d-4952-bfbc-87c2f0f42b10",
+      "name": "TokenMarkdown",
+      "type": "n8n-nodes-tokenmarkdown.tokenMarkdown",
+      "typeVersion": 1,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inspect token reduction statistics\nconst item = $input.first().json;\nreturn [{\n  json: {\n    title: item.title,\n    url: item.url,\n    tokensUsed: item.tokens,\n    rawTokensSaved: item.rawTokens - item.tokens,\n    compressionRatio: `${item.reductionPercentage.toFixed(1)}%`,\n    markdownPreview: item.markdown.slice(0, 300) + '...'\n  }\n}];"
+      },
+      "id": "18c7f9d0-6f77-4b8c-897b-91de5973bcf8",
+      "name": "Format Reduction Stats",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "TokenMarkdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TokenMarkdown": {
+      "main": [
+        [
+          {
+            "node": "Format Reduction Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
