@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tokenmarkdown",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n community node to strip 95% of HTML bloat and convert web pages into clean LLM-ready Markdown via TokenMarkdown AST engine.",
   "keywords": [
     "n8n-community-node-package",
